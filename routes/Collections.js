@@ -7,9 +7,8 @@ const {validateToken} = require('../middlewares/AuthMiddleware')
 
 router.get("/", validateToken, async (req, res) => {
     const listOfCollections = await Collections.findAll({include: [Likes]})
-    const listOfCollectionsByTypes = await Collections.findAll({include: [Likes]})
     const likedCollections = await Likes.findAll({where: {UserId: req.user.id}})
-    res.json({listOfCollections: listOfCollections, listOfCollectionsByTypes: listOfCollectionsByTypes, likedCollections: likedCollections})
+    res.json({listOfCollections: listOfCollections,likedCollections: likedCollections})
 })
 
 
